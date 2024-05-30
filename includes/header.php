@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="images/foods/logo.png" rel="shortcut icon">
+    <link href="images/foods/cityvet_logo01.png" rel="shortcut icon">
     <title>City Dog Pound Stray Animal IMS</title>
     
     <!-- core CSS -->
@@ -31,7 +31,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                     <a href="index.php"><h4 class="wow fadeInDown" style="margin-top:10px; color:#fff;"> 
+                     <a href="view-dog.php"><h4 class="wow fadeInDown" style="margin-top:10px; color:#fff;"> 
                      <img src="images/cityvet_logo01.png"  width="15% "/> City Dog Pound Stray Animal IMS</h4></a>
                 </div>
     

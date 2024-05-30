@@ -42,49 +42,62 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                     <a href="index.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;"><i class="fa fa-coffee"></i> CSJDM Dog Pound</h4></a>
+                     <a href="view-dog.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;"><i class="fa fa-coffee"></i> CSJDM Dog Pound</h4></a>
                 </div>
     
                 <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                    <li id="reservation" class="wow fadeInDown"><a href="index.php"><span class="glyphicon glyphicon-calendar"></span> View Records </a></li>
-                        <li class="dropdown active"><a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="addcnp.php"> Register Dog </a></li>
-                              <li><a href="update_cnp.php"> View Animal </a></li>
-                            </ul>
-                        </li>
-                        <li id="admin" class="wow fadeInDown"><a href="adminacc.php"><span class="glyphicon glyphicon-user"></span> Admin Account</a></li>
-                        <li id="logout" class="wow fadeInDown"><a id="logoutbtn" href='<?php echo "logout_process.php?logout=1"?>'><span class="glyphicon glyphicon-share"></span> Logout</a></li>                  
-                    </ul>
-                </div>
+                <ul class="nav navbar-nav">
+                    <li id="reservation" class="wow fadeInDown">
+                        <a href="view-dog.php"><span class="glyphicon glyphicon-calendar"></span> View Dogs </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dog-reg.php"> Register Dog </a></li>
+                            <li><a href="index.php"> View Records </a></li>
+                        </ul>
+                    </li>
+                    <li id="admin" class="wow fadeInDown">
+                        <a href="adminacc.php"><span class="glyphicon glyphicon-user"></span> Admin Account</a>
+                    </li>
+                    <li id="logout" class="wow fadeInDown">
+                        <a id="logoutbtn" href='<?php echo "logout_process.php?logout=1"?>'>
+                            <span class="glyphicon glyphicon-share"></span> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
             </div><!--/.container-->
         </nav><!--/nav-->
 <br>
 
 <?php 
-    include('includes/updateavailables.php');
+    include('includes/view-dogs-display.php');
    
 ?>
 
-<br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <!--************************************************** FOOTERS **********************************************-->
 
-<footer id="footer1" class="midnight-blue wow fadeInDown">
+<!--footer id="footer" class="midnight-blue wow fadeInDown">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 wow fadeInDown">
-            &copy; 2024 <a target="_blank" href="#" title="#">City Dog Pound Stray Animal IMS</a>. All Rights Reserved.
+                &copy; 2024 <a target="_blank" href="#" title="#">City Dog Pound Stray Animal IMS</a>. All Rights Reserved.
             </div>
             <div class="col-sm-6">
                 <ul class="pull-right wow fadeInDown">
                     <li class=""><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-                    
                     <li class=""><a href="contacts.php"><i class="fa fa-phone"></i> Contacts</a></li>
                 </ul>
             </div>
         </div>
     </div>
+</footer-->
+
 
 
 <script type="text/javascript">

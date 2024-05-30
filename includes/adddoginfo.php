@@ -5,7 +5,6 @@
                 <span style="font-weight:bold; font-family:verdana;"><i class="glyphicon glyphicon-cog"></i> Dog Information</span>
             </div>
             <div class="panel-body" style="background-color:#fff;">
-
                 <div class="col-lg-3">
                     <em style="color:red;">Note: Fields with (*) are required</em>
                 </div>
@@ -13,48 +12,66 @@
                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                         <table>
                             <tr>
+                                <td style="text-align:right; font-weight:bold;">Name : &emsp;</td>
+                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="name"></textarea></td>
+                            </tr>
+                            <tr>
                                 <td style="text-align:right; font-weight:bold;">Breed* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="breed" required></textarea></td>
+                                <td style="text-align:center;">&emsp;
+                                    <label><input type="radio" name="breed" value="Mongrel/Aspin" required> Mongrel/Aspin</label>
+                                    <label><input type="radio" name="breed" value="Mixed" required> Mixed</label>
+                                    <label><input type="radio" name="breed" value="Pure" required> Pure</label>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="text-align:right; font-weight:bold;">Gender* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <select name="gender" class="form-control" required>
-                                    <option>Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select></td>
+                                <td style="text-align:center;">&emsp;
+                                    <label><input type="radio" name="gender" value="Male" required> Male</label>
+                                    <label><input type="radio" name="gender" value="Female" required> Female</label>
+                                </td>
                             </tr>
                             <tr>
-                                <td style="text-align:right; font-weight:bold;">Physical Characteristics* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="physical_characteristics" required></textarea></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:right; font-weight:bold;">Medical Records* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="medical_records" required></textarea></td>
+                                <td style="text-align:right; font-weight:bold;">Color/Markings* : &emsp;</td>
+                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="color_markings" ></textarea></td>
                             </tr>
                             <tr>
                                 <td style="text-align:right; font-weight:bold;">Location of Capture* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="location_of_captivity" required></textarea></td>
+                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="location_of_captivity" ></textarea></td>
                             </tr>
                             <tr>
                                 <td style="text-align:right; font-weight:bold;">Date* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <input type="date" class="form-control" name="date" required></td>
+                                <td style="text-align:center;">&emsp; <input type="date" class="form-control" name="date" ></td>
                             </tr>
                             <tr>
                                 <td style="text-align:right; font-weight:bold;">Time* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <input type="time" class="form-control" name="time" required></td>
+                                <td style="text-align:center;">&emsp; <input type="time" class="form-control" name="time" ></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; font-weight:bold;">Date of Last Vaccination : &emsp;</td>
+                                <td style="text-align:center;">&emsp; <input type="date" class="form-control" name="last_vaccination_date"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right; font-weight:bold;">Residence (last 3 months) : &emsp;</td>
+                                <td style="text-align:center;">&emsp; <input type="text" class="form-control" name="residence_last_3_months"></td>
                             </tr>
                             <tr>
                                 <td style="text-align:right; font-weight:bold;">Remarks/Description* : &emsp;</td>
-                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="remarks_description" required></textarea></td>
+                                <td style="text-align:center;">&emsp; <textarea class="form-control" name="remarks_description" ></textarea></td>
                             </tr>
                             <tr>
                                 <td style="text-align:right; font-weight:bold;">Dog Pictures* : &emsp;</td>
                                 <td style="text-align:center;">&emsp; <input type="file" name="dog_pictures" required></td>
                             </tr>
+                            <tr>
+                                <td style="text-align:right; font-weight:bold;">Has Owner* : &emsp;</td>
+                                <td style="text-align:center;">&emsp;
+                                    <label><input type="radio" name="has_owner" value="Yes" required> Yes</label>
+                                    <label><input type="radio" name="has_owner" value="No" required> No</label>
+                                </td>
+                            </tr>
                             <tr style="margin-top:20px;">
                                 <td style="text-align:right;font-weight:bold;" colspan="2"><br /><p></p>
-                                    <button class="btn btn-default" type="clear">Clear</button>
+                                    <button class="btn btn-default" type="reset">Clear</button>
                                     <button class="btn btn-success" type="submit" name="save">Save</button>
                                 </td>
                             </tr>
@@ -62,45 +79,77 @@
                     </form>
                 </div>
                 <div class="col-lg-3"></div>
-
             </div>
         </div>
     </div>
 </div>
 
-<?php 
+<?php
 include('includes/dbconn.php');
+
 if (isset($_POST['save'])) {
+    $name = $_POST['name'];
     $breed = $_POST['breed'];
     $gender = $_POST['gender'];
-    $physical_characteristics = $_POST['physical_characteristics'];
-    $medical_records = $_POST['medical_records'];
+    $color_markings = $_POST['color_markings'];
     $location_of_captivity = $_POST['location_of_captivity'];
     $date = $_POST['date'];
     $time = $_POST['time'];
+    $last_vaccination_date = $_POST['last_vaccination_date'];
+    $residence_last_3_months = $_POST['residence_last_3_months'];
     $remarks_description = $_POST['remarks_description'];
-    
-    // Handle image upload
-    $dog_pictures = addslashes(file_get_contents($_FILES['dog_pictures']['tmp_name']));
-    $image_name = addslashes($_FILES['dog_pictures']['name']);
-    $image_size = getimagesize($_FILES['dog_pictures']['tmp_name']);
-    $upload_directory = "../images/upload/";
-    $location = $upload_directory . $image_name;
+    $has_owner = $_POST['has_owner'];
 
-    if (empty($breed) || empty($gender) || empty($physical_characteristics) || empty($medical_records) || empty($location_of_captivity) || empty($date) || empty($time) || empty($remarks_description)) {
-        echo '<script>alert("Fields must not be empty.");
-                      window.location.href="adddoginfo.php";
+    // Handle single image upload
+    $image_name = addslashes($_FILES['dog_pictures']['name']);
+    $file_extension = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+    $allowed_extensions = ['jpeg', 'jpg', 'png'];
+    $upload_directory = "images/upload/";
+    
+    // Generate the custom ID
+    $date_of_reg = date('Ymd'); // Current date in YYYYMMDD format
+    $result = mysqli_query($con, "SELECT COUNT(*) AS count FROM tblDogInfo");
+    $row = mysqli_fetch_assoc($result);
+    $dog_number = $row['count'] + 1; // Increment to get the new dog number
+    $custom_id = "img-$dog_number-$date_of_reg"; // Create the custom ID
+
+    // New file name with custom ID
+    $new_file_name = $custom_id . '.' . $file_extension;
+    $target_file = $upload_directory . $new_file_name;
+
+    if (!in_array($file_extension, $allowed_extensions)) {
+        echo '<script>alert("Only .jpeg, .jpg, and .png files are allowed.");
+                      window.location.href="dog-reg.php";
+              </script>';
+        exit; // Stop execution if invalid extension
+    }
+
+    if (empty($breed) || empty($gender) || empty($color_markings) || empty($location_of_captivity) || empty($date) || empty($time) || empty($remarks_description) || empty($has_owner)) {
+        echo '<script>alert("Fields marked with * are required.");
+                      window.location.href="dog-reg.php";
               </script>';
     } else {
-        $sql = "INSERT INTO tblDogInfo (breed, gender, physical_characteristics, medical_records, location_of_captivity, date, time, remarks_description, dog_pictures) VALUES ('$breed', '$gender', '$physical_characteristics', '$medical_records', '$location_of_captivity', '$date', '$time', '$remarks_description', '$location')";
-        $result = mysqli_query($con, $sql);
-        if ($result) {
-            echo '<script>alert("Save Successfully!");
-                      window.location.href="addcnp.php";</script>';
+        if (move_uploaded_file($_FILES['dog_pictures']['tmp_name'], $target_file)) {
+            // Store the relative path in the database
+            $relative_path = $upload_directory . $new_file_name;
+            $sql = "INSERT INTO tblDogInfo (id, name, breed, gender, color_markings, location_of_captivity, date, time, last_vaccination_date, residence_last_3_months, remarks_description, dog_pictures, has_owner) VALUES ('$custom_id', '$name', '$breed', '$gender', '$color_markings', '$location_of_captivity', '$date', '$time', '$last_vaccination_date', '$residence_last_3_months', '$remarks_description', '$relative_path', '$has_owner')";
+            $result = mysqli_query($con, $sql);
+            if ($result) {
+                echo '<script>alert("Save Successfully!");
+                          window.location.href="dog-reg.php";</script>';
+            } else {
+                echo '<script>alert("Sorry, unable to process your request!");
+                          window.location.href="dog-reg.php";</script>';
+            }
         } else {
-            echo '<script>alert("Sorry, unable to process your request!");
-                      window.location.href="addcnp.php";</script>';
+            echo '<script>alert("Failed to upload image.");
+                      window.location.href="dog-reg.php";
+                  </script>';
         }
     }
 }
 ?>
+
+
+
+

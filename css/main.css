@@ -1568,7 +1568,7 @@ ul.social_icons li  a i{
   background-color: #000; /* Adjust as needed */
   color: #fff; /* Adjust as needed */
   padding: 20px 0; /* Adjust as needed */
-  z-index: 999; /* Ensure footer stays above other content */
+  z-index: 100; /* Ensure footer stays above other content */
 
 }
 

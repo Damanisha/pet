@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="images/logo.jpg" rel="shortcut icon">
-    <title>ADMIN | Petshop Online Websitealasan Quary</title>
+    <title>ADMIN | CSDJM DOG POUND</title>
     
     
     <!-- core CSS -->
@@ -29,22 +29,33 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                     <a href="index.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;"><i class="fa fa-coffee"></i> CSJDM Dog Pound</h4></a>
+                     <a href="view-dog.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;"><i class="fa fa-coffee"></i> CSJDM Dog Pound</h4></a>
                 </div>
     
                 <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                    <li id="reservation" class="wow fadeInDown"><a href="index.php"><span class="glyphicon glyphicon-calendar"></span> View Records </a></li>
-                        <li class="dropdown "><a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="addcnp.php"> Register Dog </a></li>
-                              <li><a href="update_cnp.php"> View Animal </a></li>
-                            </ul>
-                        </li>
-                        <li id="admin" class="wow fadeInDown"><a href="adminacc.php"><span class="glyphicon glyphicon-user"></span> Admin Account</a></li>
-                        <li id="logout" class="wow fadeInDown"><a id="logoutbtn" href='<?php echo "logout_process.php?logout=1"?>'><span class="glyphicon glyphicon-share"></span> Logout</a></li>                  
-                    </ul>
-                </div>
+                <ul class="nav navbar-nav">
+                    <li id="reservation" class="wow fadeInDown">
+                        <a href="view-dog.php"><span class="glyphicon glyphicon-calendar"></span> View Dogs </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dog-reg.php"> Register Dog </a></li>
+                            <li><a href="index.php"> View Records </a></li>
+                        </ul>
+                    </li>
+                    <li id="admin" class="wow fadeInDown">
+                        <a href="adminacc.php"><span class="glyphicon glyphicon-user"></span> Admin Account</a>
+                    </li>
+                    <li id="logout" class="wow fadeInDown">
+                        <a id="logoutbtn" href='<?php echo "logout_process.php?logout=1"?>'>
+                            <span class="glyphicon glyphicon-share"></span> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
             </div><!--/.container-->
         </nav><!--/nav-->
 <br>
@@ -64,6 +75,7 @@
                 $result=mysqli_query($con, $sql);
                 while ($row = mysqli_fetch_array($result))
                     {
+                        $pic=
                         $name = $row['name'];
                         
 						$email = $row['email'];
@@ -87,9 +99,9 @@
             </dl>
         <hr>
         </div>  
-             <form class="form-horizontal" name="adminacc" id="adminacc" method="POST" action="adminacc_process.php" style="margin-top: 20px;">
-                <table>
-                   <tr>
+        <form class="form-group" name="adminacc" id="adminacc" method="POST" action="adminacc_process.php" style="margin-top: 20px;" enctype="multipart/form-data">                <table>
+        <table>          
+        <tr>
                             <td style="text-align:right;font-weight:bold;">Profile Avatar: &emsp;</td>
                             <td style="text-align:center;">&emsp; <input type="file" name="image" required /></td>
                     </tr>
@@ -177,9 +189,7 @@
                 <div class="col-sm-6">
                     <ul class="pull-right wow fadeInDown">
                         <li class=""><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-                        
                         <li class=""><a href="contacts.php"><i class="fa fa-phone"></i> Contacts</a></li>
-                        <li class=""><a href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i> Admin</a></li>
                     </ul>
                 </div>
             </div>

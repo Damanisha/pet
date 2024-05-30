@@ -36,6 +36,14 @@ CREATE TABLE `admininfo` (
   `password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+
+
+-- alter tbldoginfo, modify id column --
+
+ALTER TABLE tblDogInfo
+MODIFY COLUMN id varchar(20) NOT NULL;
+
 --
 -- Dumping data for table `admininfo`
 --
@@ -185,3 +193,15 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+-- additional dog information ----
+ALTER TABLE `tblDogInfo`
+ADD COLUMN `name` varchar(50) DEFAULT NULL,
+CHANGE COLUMN `physical_characteristics` `color_markings` varchar(255) NOT NULL,
+DROP COLUMN `medical_records`,
+ADD COLUMN `last_vaccination_date` date DEFAULT NULL,
+ADD COLUMN `residence_last_3_months` varchar(255) DEFAULT NULL,
+CHANGE COLUMN `dog_pictures` `dog_pictures` text NOT NULL,
+ADD COLUMN `has_owner` varchar(10) NOT NULL;

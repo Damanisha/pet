@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO admininfo (name, contact, email, username, password) VALUES ('$name', '$contact', '$email', '$username', '$password')";
 
     if (mysqli_query($con, $sql)) {
-        echo '<script>alert("Sign up successful!"); window.location.href="loginModal.php";</script>';
+        echo '<script>alert("Sign up successful!"); window.location.href="index.php";</script>';
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($con);
     }

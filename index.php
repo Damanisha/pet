@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-<!--    <link href="images/logo.jpg" rel="shortcut icon"> -->
+    <link href="images/foods/cityvet_logo01.jpg" rel="shortcut icon">
     <title>Stray Animal IMS</title>
   
   <!-- core CSS -->
@@ -26,9 +26,9 @@
 
 </head>    <style>
         .carousel-inner > .item > img {
-            width: 75%;
+            width: auto;
             height: auto;
-            max-height: 400px; /* Set a max height for the images */
+            max-height: auto; /* Set a max height for the images */
         }
     </style><!--/head-->
         
@@ -66,7 +66,7 @@
 <div class="container-fluid">
     <br>
     <div class="col-md-9 wow fadeInDown">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="background-color:#000; padding:5px;">
+        
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
