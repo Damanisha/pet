@@ -1,3 +1,5 @@
+<!----- FOR ADMIN PAGE ----->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,25 @@
     <link href="css/prettyPhoto.css" rel="stylesheet">  
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+
+    <style>
+        .wow {
+            visibility: visible;
+            animation-name: fadeInDown;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -100%, 0);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
 
     </head><!--/head-->
 <body>
@@ -60,6 +81,8 @@
         </nav><!--/nav-->
 <br>
      
+
+
 <div class="container wow fadeInDown">
     <div class="row">
         </div>
@@ -103,26 +126,26 @@
         <table>          
         <tr>
                             <td style="text-align:right;font-weight:bold;">Profile Avatar: &emsp;</td>
-                            <td style="text-align:center;">&emsp; <input type="file" name="image" required /></td>
+                            <td style="text-align:center;">&emsp; <input type="file" name="image"  /></td>
                     </tr>
                 </table>
                 <div class="form-group">
                     <label for="name" class="col-sm-4 control-label wow fadeInDown">Admin Name</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control wow fadeInDown" id="name" name="proprietor_name" placeholder="<?php echo $name?>" required>
+                    <input type="text" class="form-control wow fadeInDown" id="name" name="proprietor_name" placeholder="<?php echo $name?>" >
                     </div>
                 </div>
               
                 <div class="form-group">
                     <label for="username" class="col-sm-4 control-label wow fadeInDown">Phone</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control wow fadeInDown" id="Phone" name="phone" placeholder="<?php echo $phone?>"required>
+                    <input type="text" class="form-control wow fadeInDown" id="Phone" name="phone" placeholder="<?php echo $phone?>">
                     </div>
                 </div>
                  <div class="form-group">
                     <label for="username" class="col-sm-4 control-label wow fadeInDown">Email</label>
                     <div class="col-sm-6">
-                    <input type="email" class="form-control wow fadeInDown" id="email" name="email" placeholder="<?php echo $email?>"required>
+                    <input type="email" class="form-control wow fadeInDown" id="email" name="email" placeholder="<?php echo $email?>">
                     </div>
                 </div>
                 
@@ -130,14 +153,14 @@
                 <div class="form-group">
                     <label for="username" class="col-sm-4 control-label wow fadeInDown">Username</label>
                     <div class="col-sm-6">
-                    <input type="text" class="form-control wow fadeInDown" id="username" name="nuname" placeholder="Enter Username" required>
+                    <input type="text" class="form-control wow fadeInDown" id="username" name="nuname" placeholder="Enter Username" >
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="npassword" class="col-sm-4 control-label wow fadeInDown">Password</label>
                     <div class="col-sm-6">
-                    <input type="password" class="form-control wow fadeInDown" id="npassword" name="npword" placeholder="Enter Password" required>
+                    <input type="password" class="form-control wow fadeInDown" id="npassword" name="npword" placeholder="Enter Password" >
                     </div>
                 </div> 
                  

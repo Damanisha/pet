@@ -1,3 +1,8 @@
+<BEFORE ADDING OWNER MODAL>
+
+
+<!----- FOR DOG REGISTRATION FUNCTION ----->
+
 <div class="container wow fadeInDown" style="height:500px;">
     <div class="col-md-12" style="border: solid #D9D9D9 1px; padding: 10px; padding-top: 5px; box-shadow: #9F9F9F 2px 3px 5px; margin-top: 10px;">
         <div class="panel panel-success">
@@ -110,11 +115,20 @@ if (isset($_POST['save'])) {
     $date_of_reg = date('Ymd'); // Current date in YYYYMMDD format
     $result = mysqli_query($con, "SELECT COUNT(*) AS count FROM tblDogInfo");
     $row = mysqli_fetch_assoc($result);
-    $dog_number = $row['count'] + 1; // Increment to get the new dog number
-    $custom_id = "img-$dog_number-$date_of_reg"; // Create the custom ID
+    
+    if (isset($row['Auto_increment'])) {
+        $next_auto_increment = $row['Auto_increment']; // Get the next AUTO_INCREMENT value
+    } else {
+        // Fallback if Auto_increment is not found
+        $result = mysqli_query($con, "SELECT MAX(id) AS max_id FROM tbldoginfo");
+        $row = mysqli_fetch_assoc($result);
+        $next_auto_increment = (int)$row['max_id'] + 1;
+    }
+
+    $custom_id = "dog-$next_auto_increment"; // Create the custom ID
 
     // New file name with custom ID
-    $new_file_name = $custom_id . '.' . $file_extension;
+    $new_file_name = $custom_id . '_img' . '.' . $file_extension;
     $target_file = $upload_directory . $new_file_name;
 
     if (!in_array($file_extension, $allowed_extensions)) {

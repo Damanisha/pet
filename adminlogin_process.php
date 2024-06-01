@@ -19,7 +19,7 @@ include('includes/dbconn.php');
 						$_SESSION['username'] = $row['username']; //get username
 						$_SESSION['password'] = $row['password']; //get password
 					 }
-					 header("location:index.php");
+					 header("location:view-dog.php");
 			}else{
 				
 			echo '<script>

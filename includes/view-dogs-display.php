@@ -1,3 +1,6 @@
+<!----- FOR DOG GALLERY ----->
+
+
 <?php
 include('includes/dbconn.php');
 
@@ -86,6 +89,7 @@ $result = mysqli_query($con, $sql);
                         </div>
                                         <div class="modal-body">
                                             <img src="<?php echo $image; ?>" class="modal-img img-responsive">
+                                            <br>
                                             <p><strong>Name:</strong> <?php echo $name; ?></p>
                                             <p><strong>Breed:</strong> <?php echo $breed; ?></p>
                                             <p><strong>Gender:</strong> <?php echo $gender; ?></p>

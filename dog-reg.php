@@ -37,7 +37,7 @@
 
                         <li class="dropdown"><a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                              <li><a href="addcnp.php"> Register Dog </a></li>
+                              <li><a href="dog-reg.php"> Register Dog </a></li>
                               <li><a href="index.php"> View Records </a></li>
                             </ul>
                         </li>

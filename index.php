@@ -1,3 +1,6 @@
+<!----- FOR LANDING PAGE  ----->
+
+
 <?php
     session_start();
 
@@ -32,35 +35,6 @@
         }
     </style><!--/head-->
         
-<!--*********************************************START OF NAVIGATION BAR****************************************
-<body>
-          
-      <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                     <a href="index.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;"> 
-                     <img src="images/cityvet_logo01.png"  width="15% "/> City Dog Pound Stray Animal IMS</h4></a>
-                </div>
-    
-                <div class="collapse navbar-collapse navbar-right wow fadeInDown">
-                    <ul class="nav navbar-nav">
-                         <li class="active"><a href="index.php"><i class="fa fa-home"></i>Home</a></li>
-                        <li><a href="contacts.php">Contacts</a></li>
-                        <li class="wow fadeInDown"><a href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i> Login</a></li>
-                                                               
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-*********************************************END OF NAVIGATION BAR****************************************--> 
-
 <!--*********************************************START SLIDER************************************************-->
 
 <div class="container-fluid">
