@@ -1,89 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Animal Record List</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-</head>
+    <link href="images/foods/cityvet_logo01.jpg" rel="shortcut icon">
+    <title>CSJDM Dog Pound Stray Animal IMS - Admin</title>
 
     <!-- core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">  
+    <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/wow.min.js"></script>
-    
+
+    <!-- Custom CSS for this page -->
+    <style>
+        .content-wrapper {
+            padding-top: 10px; /* Adjust this value as necessary */
+        }
+    </style>
+</head>
 <body>
-<nav class="navbar navbar-inverse" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="index.php">
-                    <h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;">
-                    <i class="fa-solid fa-dog"></i> CSJDM Dog Pound
-                    </h4>
-                </a>
-            </div>
 
-            <div class="collapse navbar-collapse navbar-right">
-                <ul class="nav navbar-nav">
-                    <li id="reservation" class="wow fadeInDown">
-                        <a href="view-dog.php"><span class="glyphicon glyphicon-calendar"></span> View Dogs </a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#">
-                            <span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="dog-reg.php"> Register Dog </a></li>
-                            <li><a href="index.php"> View Records </a></li>
-                        </ul>
-                    </li>
-                    <li id="admin" class="wow fadeInDown">
-                        <a href="adminacc.php"><span class="glyphicon glyphicon-user"></span> Admin Account</a>
-                    </li>
-                    <li id="logout" class="wow fadeInDown">
-                        <a id="logoutbtn" href='<?php echo "logout_process.php?logout=1"?>'>
-                            <span class="glyphicon glyphicon-share"></span> Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<?php include('includes/header_main.php') ?>
 
-    <br>
-
-<div class="container">
+<div class="container content-wrapper">
     <form id="formFilter" name="formFilter" action="admin_reservefilter.php" method="POST" class="pull-left col-md-3 hidden-print">
-        <div class="form-horizontal wow fadeInDown">            
-            <label for="filter" class="control-label"> <i class="glyphicon glyphicon-filter"></i> Dog Information Results </label>
-            <div class="col-md-2"></div>
+        <div class="form-horizontal wow fadeInDown">
+            <label for="filter" class="control-label"><i class="glyphicon glyphicon-filter"></i> Dog Information Results</label>
         </div>
     </form>
 
     <a href="search-dog.php" class="btn btn-default pull-right hidden-print wow fadeInDown" style="margin-right:10px;">
         <img src="images/ico/search-icon-2048x2048-cmujl7en.png" style="max-width: 20px; max-height: 20px;"> Search
     </a>
+
     <div class="col-md-12" style="border: solid #D9D9D9 1px; padding: 10px; padding-top: 5px; box-shadow: #9F9F9F 2px 3px 5px; margin-top: 10px;">
         <p class="wow fadeInDown"><em>Animal Record List</em></p>
         <table class="table table-hover table-condensed wow fadeInDown">
@@ -93,163 +48,177 @@
                     <th width="120px" style="text-align:center;">Gender</th>
                     <th style="text-align:center;">Description</th>
                     <th style="text-align:center;">Date of Captivity</th>
-                    <th style="text-align:center;">Images <a href="#<?php echo $modalId; ?>" data-toggle="modal"></th>
-                    <th style="text-align:center;">Actions</th> <!-- New Actions column -->
+                    <th style="text-align:center;">Images</th>
+                    <th style="text-align:center;">Actions</th>
                 </tr>
             </thead>
             <tbody id="tablebody">
-                <?php include('includes/dbconn.php');
-                    $sql = "SELECT * FROM tblDogInfo WHERE 1 LIMIT 0,30";
-                    $result = mysqli_query($con, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) { ?>
-                            <tr class="success" style="cursor:pointer;">
-                                <td style="text-align:center;"><?php echo $row['breed'];?></td>
-                                <td style="text-align:center;"><?php echo $row['gender'];?></td>
-                                <td style="text-align:center;"><?php echo $row['remarks_description'];?></td>
-                                <td style="text-align:center;"><?php echo $row['date'];?></td>
-                                <td style="text-align:center;">
+                <?php 
+                include('includes/dbconn.php');
+                $sql = "SELECT * FROM tblDogInfo WHERE 1 LIMIT 0,30";
+                $result = mysqli_query($con, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) { 
+                        $modalId = 'viewModal' . $row['id'];
+                        $updateModalId = 'updateModal' . $row['id'];
+                        ?>
+                        <tr class="success" style="cursor:pointer;">
+                            <td style="text-align:center;"><?php echo $row['breed'];?></td>
+                            <td style="text-align:center;"><?php echo $row['gender'];?></td>
+                            <td style="text-align:center;"><?php echo $row['remarks_description'];?></td>
+                            <td style="text-align:center;"><?php echo $row['date'];?></td>
+                            <td style="text-align:center;">
+                                <a href="#<?php echo $modalId; ?>" data-toggle="modal">
                                     <img src="<?php echo $row['dog_pictures']; ?>" class="img-thumbnail" alt="Dog Image" width="100px">
-                                </td>
-                       
-                                <td class="wow fadeInDown" style="text-align:center;"> <!-- New Actions column data -->
+                                </a>
+                            </td>
+                            <td class="wow fadeInDown" style="text-align:center;">
                                 <center>
-                                    <br>
-                                    <button class="btn btn-primary edit-btn" data-id="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#updateModal<?php echo $row['id']; ?>">
+                                    <button class="btn btn-primary edit-btn" data-toggle="modal" data-target="#<?php echo $updateModalId; ?>">
                                         <i class="glyphicon glyphicon-edit"></i> Update
                                     </button>
-                                    <br>
-                                  
                                     <button class="btn btn-danger delete-btn" data-id="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#deleteModal">
                                         <i class="glyphicon glyphicon-trash"></i> Delete
                                     </button>
                                 </center>
+                            </td>
+                        </tr>
 
-
-                            </tr>
-                            <!-- Edit Modal -->
-                            <div class="modal fade" id="updateModal<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel"><i class="glyphicon glyphicon-edit"></i> Update Dog Information</h4>
-                                            <div>
-                                    <form class="form-horizontal" enctype="multipart/form-data" method="post" action="">
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Breed*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <label><input type="radio" name="breed" value="Mongrel/Aspin" required <?php echo ($row['breed'] == 'Mongrel/Aspin') ? 'checked' : ''; ?>> Mongrel/Aspin</label>
-                                                    <label><input type="radio" name="breed" value="Mixed" required <?php echo ($row['breed'] == 'Mixed') ? 'checked' : ''; ?>> Mixed</label>
-                                                    <label><input type="radio" name="breed" value="Pure" required <?php echo ($row['breed'] == 'Pure') ? 'checked' : ''; ?>> Pure</label>
-                                                    <input type="hidden" class="form-control" id="fdid" name="fdid" value="<?php echo $row['id']; ?>" required>
-                                                </div>
+                        <!-- View Modal -->
+                        <div id="<?php echo $modalId; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                        <h4 class="modal-title"><?php echo $row['name']; ?></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="<?php echo $row['dog_pictures']; ?>" class="modal-img img-responsive img-rounded">
                                             </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Gender*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <label><input type="radio" name="gender" value="Male" required <?php echo ($row['gender'] == 'Male') ? 'checked' : ''; ?>> Male</label>
-                                                    <label><input type="radio" name="gender" value="Female" required <?php echo ($row['gender'] == 'Female') ? 'checked' : ''; ?>> Female</label>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Color/Markings*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <textarea name="color_markings" class="form-control" required><?php echo $row['color_markings']; ?></textarea>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Location of Capture*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <textarea name="location_of_captivity" class="form-control" required><?php echo $row['location_of_captivity']; ?></textarea>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Date of Capture*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <input type="date" class="form-control" name="date" value="<?php echo $row['date']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Time of Capture*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <input type="time" class="form-control" name="time" value="<?php echo $row['time']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Date of Last Vaccination*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <input type="date" class="form-control" name="last_vaccination_date" value="<?php echo $row['last_vaccination_date']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Residence (Last 3 Months)*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <textarea name="residence_last_3_months" class="form-control" required><?php echo $row['residence_last_3_months']; ?></textarea>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Remarks/Description*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <textarea name="remarks_description" class="form-control" required><?php echo $row['remarks_description']; ?></textarea>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Has Owner?*</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <label><input type="radio" name="has_owner" value="Yes" required <?php echo ($row['has_owner'] == 'Yes') ? 'checked' : ''; ?>> Yes</label>
-                                                    <label><input type="radio" name="has_owner" value="No" required <?php echo ($row['has_owner'] == 'No') ? 'checked' : ''; ?>> No</label>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-2">
-                                                    <label class="pull-right">Image</label>
-                                                </div>
-                                                <div class="col-lg-10">
-                                                    <img src="<?php echo $row['dog_pictures']; ?>" width="120px;" class="img-responsive img-rounded" style="margin-bottom:5px;">
-                                                    <input type="file" class="form-control" id="image" name="image" >
-                                                </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Name:</strong> <?php echo $row['name']; ?></p>
+                                                <p><strong>Breed:</strong> <?php echo $row['breed']; ?></p>
+                                                <p><strong>Gender:</strong> <?php echo $row['gender']; ?></p>
+                                                <p><strong>Color/Marking:</strong> <?php echo $row['color_markings']; ?></p>
+                                                <p><strong>Location of Capture:</strong> <?php echo $row['location_of_captivity']; ?></p>
+                                                <p><strong>Date:</strong> <?php echo $row['date']; ?></p>
+                                                <p><strong>Time:</strong> <?php echo $row['time']; ?></p>
+                                                <p><strong>Remarks/Description:</strong> <?php echo $row['remarks_description']; ?></p>
+                                                <p><strong>Last Vaccination Date:</strong> <?php echo $row['last_vaccination_date']; ?></p>
+                                                <p><strong>Has Owner?:</strong> <?php echo $row['has_owner']; ?></p>
                                             </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-info" name="savechanges">Save changes</button>
-                                        </div>
-                                    </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
-                <?php } } ?>
+                        </div>
+
+<!-- Update Modal -->
+<div id="<?php echo $updateModalId; ?>" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Update Dog Information</h4>
+            </div>
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="<?php echo $row['dog_pictures']; ?>" class="modal-img img-responsive img-rounded">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Breed*</label>
+                                <div>
+                                    <label><input type="radio" name="breed" value="Mongrel/Aspin" <?php echo ($row['breed'] == 'Mongrel/Aspin') ? 'checked' : ''; ?> required> Mongrel/Aspin</label>
+                                    <label><input type="radio" name="breed" value="Mixed" <?php echo ($row['breed'] == 'Mixed') ? 'checked' : ''; ?> required> Mixed</label>
+                                    <label><input type="radio" name="breed" value="Pure" <?php echo ($row['breed'] == 'Pure') ? 'checked' : ''; ?> required> Pure</label>
+                                    <input type="hidden" class="form-control" name="fdid" value="<?php echo $row['id']; ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Gender*</label>
+                                <div>
+                                    <label><input type="radio" name="gender" value="Male" <?php echo ($row['gender'] == 'Male') ? 'checked' : ''; ?> required> Male</label>
+                                    <label><input type="radio" name="gender" value="Female" <?php echo ($row['gender'] == 'Female') ? 'checked' : ''; ?> required> Female</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Color/Markings*</label>
+                                <div>
+                                    <textarea name="color_markings" class="form-control" required><?php echo $row['color_markings']; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Location of Capture*</label>
+                                <div>
+                                    <textarea name="location_of_captivity" class="form-control" required><?php echo $row['location_of_captivity']; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Date of Capture*</label>
+                                <div>
+                                    <input type="date" class="form-control" name="date" value="<?php echo $row['date']; ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Time of Capture*</label>
+                                <div>
+                                    <input type="time" class="form-control" name="time" value="<?php echo $row['time']; ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Date of Last Vaccination</label>
+                                <div>
+                                    <input type="date" class="form-control" name="last_vaccination_date" value="<?php echo $row['last_vaccination_date']; ?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Residence (Last 3 Months)*</label>
+                                <div>
+                                    <textarea name="residence_last_3_months" class="form-control" required><?php echo $row['residence_last_3_months']; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Remarks/Description*</label>
+                                <div>
+                                    <textarea name="remarks_description" class="form-control" required><?php echo $row['remarks_description']; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Has Owner?*</label>
+                                <div>
+                                    <label><input type="radio" name="has_owner" value="Yes" <?php echo ($row['has_owner'] == 'Yes') ? 'checked' : ''; ?> required> Yes</label>
+                                    <label><input type="radio" name="has_owner" value="No" <?php echo ($row['has_owner'] == 'No') ? 'checked' : ''; ?> required> No</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Image</label>
+                                <div>
+                                    <input type="file" class="form-control" name="image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" name="savechanges">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+                    <?php } 
+                } ?>
             </tbody>
         </table>
     </div>
@@ -323,27 +292,21 @@ if (isset($_POST['savechanges'])) {
 
         if (in_array($file_extension, $allowed_extensions)) {
             $date_of_reg = date('Ymd');
-            $result = mysqli_query($con, "SELECT COUNT(*) AS count FROM tblDogInfo");
-            $row = mysqli_fetch_assoc($result);
-            $dog_number = $row['count'] + 1;
-
-            $custom_id = $id;
-            $new_file_name = "dog_img-$custom_id." . $file_extension;
-
+            $new_file_name = "dog_img-$id." . $file_extension;
             $target_file = $upload_directory . $new_file_name;
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
                 $relative_path = $upload_directory . $new_file_name;
             } else {
                 echo '<script>alert("Failed to upload image.");
-                          window.location.href="admin.php";
-                          </script>';
+                      window.location.href="admin.php";
+                      </script>';
                 exit;
             }
         } else {
             echo '<script>alert("Only .jpeg, .jpg, and .png files are allowed.");
-                          window.location.href="admin.php";
-                          </script>';
+                  window.location.href="admin.php";
+                  </script>';
             exit;
         }
     }
@@ -370,40 +333,39 @@ if (isset($_POST['savechanges'])) {
 
     if ($result) {
         echo '<script>alert("Update successfully!");
-                      window.location.href="index.php"</script>';
+              window.location.href="index.php"</script>';
     } else {
         echo '<script>alert("Sorry, unable to process your request.");
-                      window.location.href="index.php"</script>';
+              window.location.href="index.php"</script>';
     }
 }
 
 mysqli_close($con);
 ?>
 
-
-</body>
-</html>
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<!--*************************************************** FOOTERS **********************************************-->
-  
 <footer id="footer" class="midnight-blue wow fadeInDown">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 wow fadeInDown">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 wow fadeInDown">
                 &copy; 2024 <a target="_blank" href="#" title="#">City Dog Pound Stray Animal IMS</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right wow fadeInDown">
-                        <li class=""><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-                        
-                        <li class=""><a href="contacts.php"><i class="fa fa-phone"></i> Contacts</a></li>
-                        <li class=""><a href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i> Admin</a></li>
-                    </ul>
-                </div>
+            </div>
+            <div class="col-sm-6">
+                <ul class="pull-right wow fadeInDown">
+                    <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="contacts.php"><i class="fa fa-phone"></i> Contacts</a></li>
+                    <li><a href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i> Admin</a></li>
+                </ul>
             </div>
         </div>
-    </footer><!--/#footer-->
+    </div>
+</footer>
 
-    
+<!-- Scripts -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/wow.min.js"></script>
+</body>
+</html>

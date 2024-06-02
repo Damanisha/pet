@@ -1,10 +1,9 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION['username'])){ 
+if (!isset($_SESSION['username'])) {
+    include('includes/header.php');
 ?>
-
-<?php include('includes/header.php')?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,91 +12,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!--    <link href="images/logo.jpg" rel="shortcut icon"> -->
     <title>Petshop Online Website</title>
-    
-    <!-- core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">  
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-
-</head><!--/head-->
-        <!--
-*********************************************START OF NAVIGATION BAR****************************************
+</head>
 <body>
-          
-      <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="index.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:Pink;">
-                              <img src="images/logo.jpg"  width="15% "/> Petshop Online Website</h4></a>
-                </div>
-    
-                <div class="collapse navbar-collapse navbar-right wow fadeInDown">
-                    <ul class="nav navbar-nav">
-                         <li><a href="index.php"><i class="fa fa-home"></i>Home</a></li>
-                        <li ><a href="about-us.php">About Us</a></li>
-                        <li ><a href="available.php">Available Products</a></li>
-                        <li class="active"><a href="contacts.php">Contacts</a></li>
-                                                          
-                    </ul>
-                </div>
-    </div>
-        </nav>
-
-        -->
-<!--*********************************************START OF CONTACT INFO****************************************-->
-<body>
-<br><br>
-<div class="container">
+    <br><br>
+    <div class="container">
         <section id="contact-info">
-                <center><span style="font-size:35px; font-weight:bold; font-family:verdana; color:blue;">How to Reach Us?</span></center>
-
-            <div class="left wow fadeInDown">
-               <div class="col-md-6">
-                <img src="images/logo.jpg" class="img-responsive pull-right" />
-               </div> 
-               <div class="col-md-6">
-                <p class="lead">
-                    <br>
-                    <p><span style="font-size:20px; font-weight:bold; font-family:verdana; color:red;">Lorem Ipsum Dolor</span>
-                    <br><b>Address:</b> Productivity Center, Brgy. Sapang Palay Proper City of San Jose del Monte, Bulacan, San Jose del Monte, Philippines<b><br>Tel/Phone:</b> +639074985072 / 09655323255<b><br>Email Address:</b> loremipsumdolor@gmail.com</p>
+            <center>
+                <span style="font-size:35px; font-weight:bold; font-family:verdana; color:blue;">How to Reach Us?</span>
+            </center>
+            <div class="row">
+                <div class="col-md-6 wow fadeInDown">
+                    <img src="images/logo.jpg" class="img-responsive" alt="Logo" />
+                </div>
+                <div class="col-md-6 wow fadeInDown">
+                    <p class="lead">
+                        <span style="font-size:20px; font-weight:bold; font-family:verdana; color:red;">Lorem Ipsum Dolor</span>
+                        <br><b>Address:</b> Productivity Center, Brgy. Sapang Palay Proper, City of San Jose del Monte, Bulacan, San Jose del Monte, Philippines
+                        <br><b>Tel/Phone:</b> +639074985072 / 09655323255
+                        <br><b>Email Address:</b> loremipsumdolor@gmail.com
+                    </p>
                     <hr>
                     <span style="font-size:20px; font-weight:bold; font-family:verdana; color:black;">We are open</span>
                     <p><b>MONDAY TO FRIDAY -- 8:00AM - 5:00PM</b></p>
-                </p>
-                <hr>
-                <table style="width:80px;">
-                    <tr>
-                        <!--
-                        <td><a href="http://www.facebook.com"><img data-toggle="tooltip" src="images/ico/Facebook.png" class="img-responsive" /></a></td>
-                        <td><a href="http://www.instagram.com"><img src="images/ico/icons_Instagram.png" class="img-responsive" /></a></td>
-                        <td><a href="http://www.twitter.com"><img src="images/ico/Twitter.png" class="img-responsive" /></a></td>
-                        <td><a href="http://www.youtube.com"><img src="images/ico/YouTube.png" class="img-responsive" /></a></td>
-                        -->
-                    </tr>
-                </table>
-
+                    <hr>
+                    <div class="social-icons">
+                        <a href="http://www.facebook.com" data-toggle="tooltip" title="Facebook">
+                            <img src="images/ico/Facebook.png" class="img-responsive" alt="Facebook" />
+                        </a>
+                        <a href="http://www.instagram.com" data-toggle="tooltip" title="Instagram">
+                            <img src="images/ico/icons_Instagram.png" class="img-responsive" alt="Instagram" />
+                        </a>
+                        <a href="http://www.twitter.com" data-toggle="tooltip" title="Twitter">
+                            <img src="images/ico/Twitter.png" class="img-responsive" alt="Twitter" />
+                        </a>
+                        <a href="http://www.youtube.com" data-toggle="tooltip" title="YouTube">
+                            <img src="images/ico/YouTube.png" class="img-responsive" alt="YouTube" />
+                        </a>
+                    </div>
                 </div>
             </div>
-        
         </section>
-</div>
-<br><br><br><br><br><br><br><br><br>
-<!--*************************************************** FOOTERS **********************************************-->
-
-<?php include('includes/footer.php');?><!--/#footer-->
-    <?php include('loginModal.php')?>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+    <!--*************************************************** FOOTERS **********************************************-->
+    <?php include('includes/footer.php'); ?>
+    <?php include('loginModal.php'); ?>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
@@ -107,11 +74,8 @@
 </body>
 </html>
 
-
-<?php 
-
-} else if(isset($_SESSION['username'])) { 
-
+<?php
+} else {
     include('includes/admin.php');
-
-} ?>
+}
+?>

@@ -1,13 +1,17 @@
 <?php
-	session_start();
-	if(isset($_GET['logout'])) {
-		unset ($_SESSION['id']);
-		unset($_SESSION['username']);
-		unset($_SESSION['password']);
-		
-	header('location:index.php');
-	
-	} else {
-		echo mysqli_error();
-	}
+session_start();
+
+if (isset($_GET['logout'])) {
+    // Unset all session variables
+    session_unset();
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page or index page
+    header('Location: index.php');
+    exit;
+} else {
+    echo "Error: Logout process failed.";
+}
 ?>

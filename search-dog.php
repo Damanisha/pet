@@ -1,59 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="images/foods/cityvet_logo01.png" rel="shortcut icon">
-    <title>ADMIN | CSJDM DOG POUND</title>
-    
-    <!-- core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">  
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
 
-    </head><!--/head-->
-    <body>
-     <nav class="navbar navbar-inverse" role="banner">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                     <a href="view-dog.php"><h4 class="wow fadeInDown" style="margin-top:20px; color:#FFF;"><i class="fa fa-coffee"></i> CSJDM Dog Pound</h4></a>
-                </div>
-    
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                    <li id="reservation" class=" wow fadeInDown"><a href="view-dog.php"><span class="glyphicon glyphicon-calendar"></span> View Dogs </a></li>
 
-                        <li class="dropdown"><a class="dropdown-toggle wow fadeInDown" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-th"></span> Animal Information <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="dog-reg.php"> Register Dog </a></li>
-                              <li><a href="index.php"> View Records </a></li>
-                            </ul>
-                        </li>
-                        <li id="admin" class="wow fadeInDown"><a href="adminacc.php"><span class="glyphicon glyphicon-user"></span> Admin Account</a></li>
-                        <li id="logout" class="wow fadeInDown"><a id="logoutbtn" href='<?php echo "logout_process.php?logout=1"?>'><span class="glyphicon glyphicon-share"></span> Logout</a></li>                  
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-<br>
-    
-    
-    <?php
+
+<?php
+
+
+session_start();
+
+
+// Check if the session variable is set
+if (!isset($_SESSION['proprietor_id'])) {
+    // Handle the case where the session variable is not set
+    echo "Session not started. Please log in.";
+    exit;
+}
+
 include('includes/dbconn.php');
 
 $searchResults = [];
+$records_per_page = 10; // Number of records per page
+
+// Get the current page number from the URL, default to page 1 if not set
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($current_page - 1) * $records_per_page;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $searchText = $_POST['searchText'];
@@ -73,8 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             last_vaccination_date LIKE CONCAT('%', ?, '%') OR
             residence_last_3_months LIKE CONCAT('%', ?, '%') OR
             has_owner LIKE CONCAT('%', ?, '%')
+        LIMIT ?, ?
     ");
-    $stmt->bind_param("sssssssssss", $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText);
+    $stmt->bind_param("sssssssssssii", $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $offset, $records_per_page);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -83,20 +52,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
-    $con->close();
 }
+
+// Get the total number of records for pagination
+$total_records_query = $con->prepare("
+    SELECT COUNT(*) FROM tbldoginfo 
+    WHERE 
+        breed LIKE CONCAT('%', ?, '%') OR
+        gender LIKE CONCAT('%', ?, '%') OR
+        color_markings LIKE CONCAT('%', ?, '%') OR
+        location_of_captivity LIKE CONCAT('%', ?, '%') OR
+        date LIKE CONCAT('%', ?, '%') OR
+        time LIKE CONCAT('%', ?, '%') OR
+        remarks_description LIKE CONCAT('%', ?, '%') OR
+        name LIKE CONCAT('%', ?, '%') OR
+        last_vaccination_date LIKE CONCAT('%', ?, '%') OR
+        residence_last_3_months LIKE CONCAT('%', ?, '%') OR
+        has_owner LIKE CONCAT('%', ?, '%')
+");
+$total_records_query->bind_param("sssssssssss", $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText, $searchText);
+$total_records_query->execute();
+$total_records_query->bind_result($total_records);
+$total_records_query->fetch();
+$total_records_query->close();
+
+$total_pages = ceil($total_records / $records_per_page);
+
+$con->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+    <?php include ('includes/header_main.php')?>
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Dog Info</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="images/foods/cityvet_logo01.jpg" rel="shortcut icon">
+    <title>Dog Search - Stray Animal IMS</title>
+  
+    <!-- core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">  
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+
+    <style>
+        .content-wrapper {
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            
+        }
+        .search-form {
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        .panel-body {
+            padding: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .img-thumbnail {
+            max-width: 80px;
+            height: auto;
+        }
+        .search-results {
+            margin-top: 20px;
+            width: 100%;
+        }
+        .pagination {
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+
+<body>
+    <div class="container content-wrapper">
         <form id="formFilter" name="formFilter" action="search-dog.php" method="POST" class="pull-left col-md-3 hidden-print">
             <div class="form-horizontal wow fadeInDown">            
                 <label for="filter" class="control-label"> <i class="glyphicon glyphicon-filter"></i> Dog Information Results </label>
@@ -112,9 +155,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" action="search-dog.php">
                 <div class="form-group">
                     <label for="searchText">Enter search terms:</label>
-                    <input type="text" class="form-control" id="searchText" name="searchText" required>
+                    <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Type Description, Color, i.e. white, curly, collar" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary">Search</button><br>
+                <br>
             </form>
             <div class="mt-4">
                 <table class="table table-hover table-condensed wow fadeInDown">
@@ -167,30 +211,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <!-- jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <?php if ($current_page > 1): ?>
+                        <li>
+                            <a href="search-dog.php?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="<?php if ($i == $current_page) echo 'active'; ?>">
+                            <a href="search-dog.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($current_page < $total_pages): ?>
+                        <li>
+                            <a href="search-dog.php?page=<?php echo $current_page + 1; ?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
 
-<br><br><br><br><br><br>
-
-<!--*************************************************** FOOTERS **********************************************-->
-  
-<footer id="footer" class="midnight-blue wow fadeInDown">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 wow fadeInDown">
-                &copy; 2024 <a target="_blank" href="#" title="#">City Dog Pound Stray Animal IMS</a>. All Rights Reserved.
-                </div>
-                <div class="col-sm-6">
-                    <ul class="pull-right wow fadeInDown">
-                        <li class=""><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-                        
-                        <li class=""><a href="contacts.php"><i class="fa fa-phone"></i> Contacts</a></li>
-                        <li class=""><a href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="fa fa-lock"></i> Admin</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer><!--/#footer-->
+<?php include('includes/footer.php')?>
